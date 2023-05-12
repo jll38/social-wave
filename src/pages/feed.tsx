@@ -2,18 +2,25 @@ import { UserPicture } from "./../components/UserPicture";
 import { Post } from "./../components/Post";
 import { FeedFriend } from "./../components/FeedFriend";
 import { useState } from "react";
+import Navbar from "@/components/Navbar";
 import Link from "next/link";
 
 export default function Feed() {
   const [general, setGeneral] = useState(true);
   return (
     <>
-      <main className="flex justify-between items-start md:px-32 py-20 text-gray-700">
+      <Navbar fixed={true}/>
+      <main className="flex justify-between items-start md:px-32 mt-0 text-gray-700">
         <div className="hidden md:block w-72 border-gray-100 border-2 rounded-md shadow-lg">
           <div className="bg-blue-400 h-24 border-b-2 drop-shadow-none"></div>
           <div className="relative">
             <div className="absolute inset-0 flex items-center justify-center">
-              <UserPicture size={24} textSize={"6xl"} img={"/images/istockphoto-1327592506-612x612.jpg"} user="Test"/>
+              <UserPicture
+                size={24}
+                textSize={"6xl"}
+                img={"/images/istockphoto-1327592506-612x612.jpg"}
+                user="Test"
+              />
             </div>
           </div>
           <div className="p-5 text-center leading-8 mt-10">
@@ -129,7 +136,8 @@ export default function Feed() {
         <div className="hidden md:block w-[25%] border-gray-100 border-2 rounded-md shadow-lg">
           <div className="text-center h-20 border-b-2 text-3xl">Friends</div>
           <div className="w-full overflow-y-scroll h-52">
-            <FeedFriend name="Julian Lechner" username="jlucher" />
+            <FeedFriend name="Julian Lechner" username="jlucher" online={true}/>
+            <FeedFriend name="Julian Lechner" username="jlucher" online={false}/>
           </div>
         </div>
       </main>
