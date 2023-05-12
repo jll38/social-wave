@@ -1,3 +1,4 @@
+import { UserPicture } from "./../components/UserPicture";
 import { Post } from "./../components/Post";
 import { FeedFriend } from "./../components/FeedFriend";
 import { useState } from "react";
@@ -12,17 +13,17 @@ export default function Feed() {
           <div className="bg-blue-400 h-24 border-b-2 drop-shadow-none"></div>
           <div className="relative">
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative inline-flex items-center justify-center w-24 h-24 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                <span className="text-3xl text-gray-600 dark:text-gray-300">
-                  FL
-                </span>
-              </div>
+              <UserPicture size={24} textSize={"6xl"} img={"/images/istockphoto-1327592506-612x612.jpg"} user="Test"/>
             </div>
           </div>
           <div className="p-5 text-center leading-8 mt-10">
-            <div>First Last</div>
-            <div>@username</div>
-            <div>Bio</div>
+            <div className="leading-4">
+              <div>First Last</div>
+              <div className="text-gray-400">@username</div>
+              <div className="my-4 text-sm leading-3">
+                This is a placeholder for the user bio
+              </div>
+            </div>
             <div className="flex justify-center bg-blue-400 rounded-2xl text-white">
               <div className="border-r pr-2 w-full">0 posts</div>
               <div className="border-l pl-2 w-full ">0 friends</div>
@@ -33,7 +34,7 @@ export default function Feed() {
         <div id="post-list" className="w-full lg:w-[70%]">
           <button
             id="post-button"
-            className="fixed bg-blue-400 hover:bg-blue-300 transition duration-150 ease-in-out rounded-full bottom-10 right-10 z-50 opacity-75 sm:opacity-100"
+            className="fixed text-white bg-blue-400 hover:bg-blue-300 transition duration-150 ease-in-out rounded-full bottom-10 right-10 z-50 opacity-75 sm:opacity-100"
           >
             <i className="fa-sharp fa-solid fa-pen-to-square text-2xl sm:text-6xl px-6 py-5 sm:py-6"></i>
           </button>
@@ -43,16 +44,26 @@ export default function Feed() {
                 <div>General</div>
               </button>
             ) : (
-              <button className="border-r border-gray-400 pr-2 w-full bg-gray-200 transition duration-150 ease-in-out" onClick={() => {setGeneral(true)}}>
+              <button
+                className="border-r border-gray-400 pr-2 w-full bg-gray-200 transition duration-150 ease-in-out"
+                onClick={() => {
+                  setGeneral(true);
+                }}
+              >
                 <div>General</div>
               </button>
             )}
             {!general ? (
-              <button className="border-r border-gray-400 pr-2 w-full bg-gray-300 transition duration-150 ease-in-out">
+              <button className="border-l border-gray-400 pr-2 w-full bg-gray-300 transition duration-150 ease-in-out">
                 <div>Friends</div>
               </button>
             ) : (
-              <button className="border-r border-gray-400 pr-2 w-full bg-gray-200 transition duration-150 ease-in-out" onClick={() => {setGeneral(false)}}>
+              <button
+                className="border-l border-gray-400 pr-2 w-full bg-gray-200 transition duration-150 ease-in-out"
+                onClick={() => {
+                  setGeneral(false);
+                }}
+              >
                 <div>Friends</div>
               </button>
             )}
@@ -65,7 +76,54 @@ export default function Feed() {
             date="May 12, 2023"
             likes={0}
           />
-          <div className="border-gray-100 border-2 rounded-md shadow-lg mx-4 px-10 pt-5 h-52"></div>
+          <Post
+            id={0}
+            name={"Julian Lechner"}
+            username="jlucher"
+            content=""
+            date="May 12, 2023"
+            likes={0}
+          />
+          <Post
+            id={0}
+            name={"Julian Lechner"}
+            username="jlucher"
+            content=""
+            date="May 12, 2023"
+            likes={0}
+          />
+          <Post
+            id={0}
+            name={"Julian Lechner"}
+            username="jlucher"
+            content=""
+            date="May 12, 2023"
+            likes={0}
+          />
+          <Post
+            id={0}
+            name={"Julian Lechner"}
+            username="jlucher"
+            content=""
+            date="May 12, 2023"
+            likes={0}
+          />
+          <Post
+            id={0}
+            name={"Julian Lechner"}
+            username="jlucher"
+            content=""
+            date="May 12, 2023"
+            likes={0}
+          />
+          <Post
+            id={0}
+            name={"Julian Lechner"}
+            username="jlucher"
+            content=""
+            date="May 12, 2023"
+            likes={0}
+          />
         </div>
 
         <div className="hidden md:block w-[25%] border-gray-100 border-2 rounded-md shadow-lg">
