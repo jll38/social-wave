@@ -1,4 +1,4 @@
-import { FeedFriend } from './../components/FeedFriend';
+import { FeedFriend } from "./../components/FeedFriend";
 
 import Link from "next/link";
 
@@ -29,12 +29,15 @@ export default function Feed() {
         </div>
 
         <div id="post-list" className="w-full lg:w-[70%]">
+          <button id="post-button" className="fixed bg-blue-400 hover:bg-blue-300 transition duration-150 ease-in-out rounded-full bottom-10 right-10 z-50 opacity-75 sm:opacity-100">
+            <i className="fa-sharp fa-solid fa-pen-to-square text-2xl sm:text-6xl px-6 py-5 sm:py-6"></i>
+          </button>
           <div className="flex justify-center text-center px-4 h-12 mb-4 rounded-3xl overflow-hidden">
-            <div className='border-r border-gray-400 pr-2 w-full bg-gray-200'>
-              <div className='relative top-3'>General</div>
+            <div className="border-r border-gray-400 pr-2 w-full bg-gray-200">
+              <div className="relative top-3">General</div>
             </div>
-            <div className='border-l border-gray-400 pr-2 w-full bg-gray-200'>
-            <div className='relative top-3'>Friends</div>
+            <div className="border-l border-gray-400 pr-2 w-full bg-gray-200">
+              <div className="relative top-3">Friends</div>
             </div>
           </div>
           <div className="border-gray-100 border-2 rounded-md shadow-lg mx-4 px-10 pt-5 min-h-52 pb-6">
@@ -124,7 +127,7 @@ export default function Feed() {
         <div className="hidden md:block w-[20%] border-gray-100 border-2 rounded-md shadow-lg">
           <div className="text-center h-20 border-b-2 text-3xl">Friends</div>
           <div className="w-full overflow-y-scroll h-52">
-            <FeedFriend name="Julian Lechner" username="jlucher"/>
+            <FeedFriend name="Julian Lechner" username="jlucher" />
           </div>
         </div>
       </main>
