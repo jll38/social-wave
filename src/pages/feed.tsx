@@ -1,10 +1,11 @@
+import { FeedFriend } from './../components/FeedFriend';
+
 import Link from "next/link";
 
 export default function Feed() {
   return (
     <>
       <main className="flex justify-between items-start md:px-32 py-20 text-gray-700">
-
         <div className="hidden md:block w-72 border-gray-100 border-2 rounded-md shadow-lg">
           <div className="bg-blue-400 h-24 border-b-2 drop-shadow-none"></div>
           <div className="relative">
@@ -28,6 +29,14 @@ export default function Feed() {
         </div>
 
         <div id="post-list" className="w-full lg:w-[70%]">
+          <div className="flex justify-center text-center px-4 h-12 mb-4 rounded-3xl overflow-hidden">
+            <div className='border-r border-gray-400 pr-2 w-full bg-gray-200'>
+              <div className='relative top-3'>General</div>
+            </div>
+            <div className='border-l border-gray-400 pr-2 w-full bg-gray-200'>
+            <div className='relative top-3'>Friends</div>
+            </div>
+          </div>
           <div className="border-gray-100 border-2 rounded-md shadow-lg mx-4 px-10 pt-5 min-h-52 pb-6">
             <div className="h-20 border-b-2">
               <div className="relative">
@@ -44,7 +53,7 @@ export default function Feed() {
                 <div className="text-md text-gray-400">@username</div>
               </div>
             </div>
-            <div>
+            <div className="mt-2">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -53,24 +62,50 @@ export default function Feed() {
               nulla pariatur. Excepteur sint occaecat cupidatat non proident,
               sunt in culpa qui officia deserunt mollit anim id est laborum.
             </div>
+            <div className="text-md text-gray-400">May 11th, 2023</div>
+
             <div className="text-gray-600 mt-4">
-              <ul className="flex gap-5">
-                <li>Like</li>
-                <li>Share</li>
-                <li>Repost</li>
+              <ul className="flex gap-10">
+                <li>
+                  <button
+                    className="transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
+                    data-te-toggle="tooltip"
+                    title="Like"
+                  >
+                    <i
+                      className={"fa-regular fa-thumbs-up fa-flip-horizontal"}
+                    ></i>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
+                    data-te-toggle="tooltip"
+                    title="Share"
+                  >
+                    <i className="fa-solid fa-share"></i>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
+                    data-te-toggle="tooltip"
+                    title="Repost"
+                  >
+                    <i className="fa-solid fa-rotate"></i>
+                  </button>
+                </li>
               </ul>
               <div className="mt-2 flex w-full">
                 <form className="w-full">
                   <div className="relative ">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      
-                    </div>
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
                     <input
                       type="text"
                       id="commentInput"
                       className="block w-full py-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
                       placeholder="Leave a comment"
-                      required 
+                      required
                     />
                     <button
                       type="submit"
@@ -87,7 +122,10 @@ export default function Feed() {
         </div>
 
         <div className="hidden md:block w-[20%] border-gray-100 border-2 rounded-md shadow-lg">
-          <div>Friends</div>
+          <div className="text-center h-20 border-b-2 text-3xl">Friends</div>
+          <div className="w-full overflow-y-scroll h-52">
+            <FeedFriend name="Julian Lechner" username="jlucher"/>
+          </div>
         </div>
       </main>
     </>
