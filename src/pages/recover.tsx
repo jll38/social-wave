@@ -1,9 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
+import animations from "../styles/animations.module.css"
 export default function Recover() {
   return (
     <main id="hero-screen">
+      <Image src={"/images/700821.png"} alt="background img" fill={true} className={`absolute -z-10 ${animations.bob}`} />
       <div className="min-h-screen flex items-center justify-center object-center">
-        <div className="text-center w-full sm:w-3/4 md:w-1/3 rounded-md">
+        <div className="text-center w-full sm:w-3/4 md:w-1/3 rounded-xl bg-white py-10 shadow-lg">
           <div id="login-box-header" className=" my-5">
             <h1 className="text-blue-400 text-6xl font-bold"><Link href="/">SocialWave</Link></h1>
             <p className="text-gray-500 text-lg">Ride the wave of connection</p>

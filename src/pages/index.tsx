@@ -29,6 +29,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main id="hero-screen">
+        
       <Image src={"/images/700821.png"} alt="background img" fill={true} className={`absolute -z-10 ${animations.bob}`} />
         <div className="min-h-screen flex items-center justify-center object-center z-50">
           <div className="text-center w-full sm:w-3/4 md:w-1/3 rounded-xl bg-white py-10 shadow-lg">
