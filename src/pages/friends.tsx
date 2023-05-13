@@ -6,8 +6,8 @@ export default function Friends() {
   return (
     <>
       <Navbar fixed={true} />
-      <main className="flex justify-between items-start mt-0 text-gray-700 px-4 md:px-0">
-        <div className="border-2 mx-auto md:w-1/2 w-full rounded-md shadow-md">
+      <main className="flex justify-between items-start mt-0 text-gray-700 px-4 md:px-0 h-[90vh]">
+        <div className="border-2 mx-auto md:w-1/2 w-full rounded-md shadow-md bg-white">
           <div className="mx-auto flex justify-center align-bottom border-b-2 border-gray-100">
             <h1 className="text-4xl font-extrabold">Friends</h1>
           </div>
@@ -15,7 +15,7 @@ export default function Friends() {
             <label className="block mb-2 font-bold text-gray-600 text-md">
               Add Friend
             </label>
-            <div className="flex gap-2">
+            <div className="md:flex gap-2">
               <input
                 type="text"
                 name="addFriend"
@@ -26,7 +26,7 @@ export default function Friends() {
               />
               <button
                 type="submit"
-                className="w-1/6 text-white bg-blue-500 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="w-1/3 lg:w-1/6 text-white bg-blue-500 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 onClick={handleSendFriendRequest}
               >
                 Send

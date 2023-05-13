@@ -28,8 +28,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main id="hero-screen">
-        <div className="min-h-screen flex items-center justify-center object-center">
-          <div className="text-center w-full sm:w-3/4 md:w-1/3 rounded-md">
+      <Image src={"/images/700821.png"} alt="background img" fill={true} className={"absolute -z-10"} />
+        <div className="min-h-screen flex items-center justify-center object-center z-50">
+          <div className="text-center w-full sm:w-3/4 md:w-1/3 rounded-xl bg-white py-10 shadow-lg">
             <div id="login-box-header" className=" my-5">
               <h1 className="text-blue-400 text-6xl font-bold">SocialWave</h1>
               <p className="text-gray-500 text-lg">
