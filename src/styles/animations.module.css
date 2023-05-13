@@ -1,0 +1,21 @@
+@keyframes bob-up-down {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+@keyframes bob-left-right {
+  0%,
+  100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+.bob {
+  animation: bob-up-down 5s ease-in-out infinite;
+}

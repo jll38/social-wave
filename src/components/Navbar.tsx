@@ -9,6 +9,7 @@ export default function Navbar({ fixed }: NavbarProps) {
   const handleLogout = () => {
 
   };
+  const user = "username";
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-blue-400 mb-3">
@@ -37,20 +38,28 @@ export default function Navbar({ fixed }: NavbarProps) {
           >
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
               <li className="nav-item">
-                <a
+                <Link
                   className="px-3 pt-2 flex items-center text-xs uppercase font-bold text-white hover:opacity-75"
-                  href="#"
+                  href={`/user/${user}`}
                 >
                   <span className="ml-2">Profile</span>
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a
+                <Link
                   className="px-3 pt-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                   href="/friends"
                 >
                   <span className="ml-2">Friends</span>
-                </a>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="px-3 pt-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                  href="/feed"
+                >
+                  <span className="ml-2">Feed</span>
+                </Link>
               </li>
               <li className="nav-item">
                 <button
