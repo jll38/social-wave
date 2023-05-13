@@ -10,11 +10,11 @@ export default function Feed() {
   return (
     <>
       <Navbar fixed={true}/>
-      <main className="flex justify-between items-start md:px-32 mt-0 text-gray-700">
-        <div className="hidden md:block w-72 border-gray-100 border-2 rounded-md shadow-lg">
+      <main className="flex justify-between items-start md:px-32 mt-0 text-gray-700 h-[90vh]">
+        <div className="hidden md:block w-72 border-gray-100 border-2 rounded-md shadow-lg bg-white">
           <div className="bg-blue-400 h-24 border-b-2 drop-shadow-none"></div>
           <div className="relative">
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center ">
               <UserPicture
                 size={24}
                 textSize={"6xl"}
@@ -38,7 +38,7 @@ export default function Feed() {
           </div>
         </div>
 
-        <div id="post-list" className="w-full lg:w-[70%]">
+        <div id="post-list" className="w-full lg:w-[70%] overflow-y-scroll h-[90vh]">
           <button
             id="post-button"
             className="fixed text-white bg-blue-400 hover:bg-blue-300 transition duration-150 ease-in-out rounded-full bottom-10 right-10 z-50 opacity-75 sm:opacity-100"
@@ -133,7 +133,7 @@ export default function Feed() {
           />
         </div>
 
-        <div className="hidden md:block w-[25%] border-gray-100 border-2 rounded-md shadow-lg">
+        <div className="hidden md:block w-[25%] border-gray-100 border-2 rounded-md shadow-lg bg-white">
           <div className="text-center h-20 border-b-2 text-3xl">Friends</div>
           <div className="w-full overflow-y-scroll h-52">
             <FeedFriend name="Julian Lechner" username="jlucher" online={true}/>

@@ -5,6 +5,10 @@ interface NavbarProps{
 }
 export default function Navbar({ fixed }: NavbarProps) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
+  
+  const handleLogout = () => {
+
+  };
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-blue-400 mb-3">
@@ -43,10 +47,18 @@ export default function Navbar({ fixed }: NavbarProps) {
               <li className="nav-item">
                 <a
                   className="px-3 pt-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                  href="#pablo"
+                  href="/friends"
+                >
+                  <span className="ml-2">Friends</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <button
+                  className="px-3 pt-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                  onClick={handleLogout}
                 >
                   <span className="ml-2">Logout</span>
-                </a>
+                </button>
               </li>
             </ul>
           </div>

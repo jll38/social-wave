@@ -24,7 +24,7 @@ export function UserPicture({ size, img, user, textSize }: UserPictureProps) {
               {hasUser && user![0]}
             </span>
           ) : (
-            <Image src={img} className="object-cover" alt={user + "'s Picture"} width="300" height="300" />
+            <Image src={img} className="object-cover" alt={user + "'s Picture"} width="100" height="100" />
           )}
         </>
       )}

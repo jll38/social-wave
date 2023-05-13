@@ -5,7 +5,7 @@ const handleLogout = () => {
 
 };
 export function Post({...props}) {
-  return <div className="border-gray-100 border-2 rounded-md shadow-lg mx-4 px-10 pt-5 min-h-52 pb-6">
+  return <div className="bg-white border-gray-100 border-2 rounded-md shadow-lg mx-4 px-10 pt-5 min-h-52 pb-6 my-5">
             <div className="h-20 border-b-2">
               <div className="relative">
                 <div className="absolute top-2 flex items-center justify-center">
