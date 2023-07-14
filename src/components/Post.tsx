@@ -9,7 +9,7 @@ export function Post({...props}) {
             <div className="h-20 border-b-2">
               <div className="relative">
                 <div className="absolute top-2 flex items-center justify-center">
-                <UserPicture size={16} user={"J"} textSize={"2xl"}/>
+                <UserPicture size={52} user={"J"} textSize={"2xl"}/>
                 </div>
               </div>
               <div className="relative top-5 left-20 leading-3">
@@ -50,7 +50,7 @@ export function Post({...props}) {
                 <form className="w-full">
                   <div className="relative ">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
-                    <input type="text" id="commentInput" className="block w-full py-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Leave a comment" required autoComplete={"off"}/>
+                    <input type="text" id="commentInput" className="block w-full py-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gradient-to-t from-gray-50 to-gray-100 focus:ring-blue-500 focus:border-blue-500 " placeholder="Leave a comment" required autoComplete={"off"}/>
                     <button onClick={handleLogout} className="text-gray-600 absolute right-0 -bottom-0.5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-4 py-2">
                       <i className="fa-regular fa-paper-plane"></i>
                     </button>

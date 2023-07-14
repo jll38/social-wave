@@ -10,12 +10,15 @@ interface UserPictureProps {
 
 export function UserPicture({ size, img, user, textSize }: UserPictureProps) {
   const hasUser = user && user.length > 0;
-
+  console.log("picture size: " + size + "\nType: " + typeof(size));
   return (
-    <div className={`relative inline-flex items-center justify-center w-${size} h-${size} overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600`}>
+    <div style={{
+      width: `${size}px`,
+      height: `${size}px`
+    }} className={`relative inline-flex items-center justify-center overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600`}>
       {!img && !hasUser ? (
         <i className={`text-${textSize} text-gray-600 dark:text-gray-300 fa-solid fa-user`}>
-          {/* Render specific content when user is not defined */}
+          {/* Render Template when user is not defined */}
         </i>
       ) : (
         <>

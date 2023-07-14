@@ -16,7 +16,7 @@ export default function Feed() {
           <div className="relative">
             <div className="absolute inset-0 flex items-center justify-center ">
               <UserPicture
-                size={24}
+                size={84}
                 textSize={"6xl"}
                 img={"/images/istockphoto-1327592506-612x612.jpg"}
                 user="Test"

@@ -3,7 +3,7 @@ import { UserPicture } from "./UserPicture";
 export function FeedFriend({ ...props }) {
   return (
     <div className="p-2 flex">
-      <UserPicture size={12} user={""} textSize={"md"} />
+      <UserPicture size={42} user={""} textSize={"md"} />
       {props.online ? (
         <span className="relative flex h-3 w-3 -left-3">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
