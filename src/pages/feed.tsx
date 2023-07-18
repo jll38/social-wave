@@ -4,16 +4,31 @@ import { FeedFriend } from "./../components/FeedFriend";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
-import { redirect } from 'next/navigation';
-import { signOut, useSession } from 'next-auth/react'
+import { redirect } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
+import { initializeApp, getApps } from "firebase/app";
+import { setDoc, doc, getFirestore } from "firebase/firestore";
+
+import { handleFirebaseLoginError } from "@/lib/handleErrors";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { FirebaseError } from "firebase/app";
+import { firebaseConfig } from "@/lib/firebase";
+
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
+const db = getFirestore(app);
+
 
 export default function Feed() {
   const [general, setGeneral] = useState(true);
-
-
+  const auth = getAuth(app);
+  const user = auth.currentUser;
   return (
     <>
-      <Navbar fixed={true}/>
+      <Navbar fixed={true} />
       <main className="flex justify-between items-start md:px-32 mt-0 text-gray-700 h-[90vh]">
         <div className="hidden md:block w-72 border-gray-100 border-2 rounded-md shadow-lg bg-white">
           <div className="bg-blue-400 h-24 border-b-2 drop-shadow-none"></div>
@@ -30,7 +45,7 @@ export default function Feed() {
           <div className="p-5 text-center leading-8 mt-10">
             <div className="leading-4">
               <div>First Last</div>
-              <div className="text-gray-400">@username</div>
+              <div className="text-gray-400">@{user ? user.email : ""}</div>
               <div className="my-4 text-sm leading-3">
                 This is a placeholder for the user bio
               </div>
@@ -42,7 +57,10 @@ export default function Feed() {
           </div>
         </div>
 
-        <div id="post-list" className="w-full lg:w-[70%] overflow-y-scroll h-[90vh]">
+        <div
+          id="post-list"
+          className="w-full lg:w-[70%] overflow-y-scroll h-[90vh]"
+        >
           <button
             id="post-button"
             className="fixed text-white bg-blue-400 hover:bg-blue-300 transition duration-150 ease-in-out rounded-full bottom-10 right-10 z-50 opacity-75 sm:opacity-100"
@@ -140,8 +158,16 @@ export default function Feed() {
         <div className="hidden md:block w-[25%] border-gray-100 border-2 rounded-md shadow-lg bg-white">
           <div className="text-center h-20 border-b-2 text-3xl">Friends</div>
           <div className="w-full overflow-y-scroll h-52">
-            <FeedFriend name="Julian Lechner" username="jlucher" online={true}/>
-            <FeedFriend name="Julian Lechner" username="jlucher" online={false}/>
+            <FeedFriend
+              name="Julian Lechner"
+              username="jlucher"
+              online={true}
+            />
+            <FeedFriend
+              name="Julian Lechner"
+              username="jlucher"
+              online={false}
+            />
           </div>
         </div>
       </main>

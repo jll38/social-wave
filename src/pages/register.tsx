@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useState, ChangeEvent } from "react";
 import animations from "../styles/animations.module.css";
 import { initializeApp, getApps } from "firebase/app";
+import { setDoc, doc, getFirestore } from "firebase/firestore";
 
 import { handleFirebaseLoginError } from "@/lib/handleErrors";
 import {
@@ -20,12 +21,15 @@ import { firebaseConfig } from "@/lib/firebase";
 
 const inter = Inter({ subsets: ["latin"] });
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
+const db = getFirestore(app);
 const auth = getAuth(app);
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   // Initialize the Firebase auth object
   const auth = getAuth();
@@ -34,19 +38,30 @@ export default function Register() {
   const handleSignup = async (
     email: string,
     password: string,
-    username: string
+    username: string,
+    firstName: string,
+    lastName: string
   ) => {
     try {
-      // Create a new user account with the email and password
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
 
+      // This will set displayName, Firebase only supports displayName and photoURL.
       await updateProfile(userCredential.user, {
         displayName: username,
       });
+
+      // Create a Firestore document for storing additional user information.
+      const userDocument = {
+        email,
+        username,
+        firstName,
+        lastName,
+      };
+      await setDoc(doc(db, "users", userCredential.user.uid), userDocument);
 
       window.location.assign("/feed");
     } catch (error) {
@@ -55,6 +70,7 @@ export default function Register() {
       console.log(handleFirebaseLoginError(firebaseError));
     }
   };
+
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
@@ -65,6 +81,10 @@ export default function Register() {
       setPassword(value);
     } else if (name === "usernames") {
       setUsername(value);
+    } else if (name === "fName") {
+      setFirstName(value);
+    } else if (name === "lName") {
+      setLastName(value);
     }
   };
   return (
@@ -103,6 +123,7 @@ export default function Register() {
                       id="fName"
                       className="bg-gray-50 border border-gray-300 text-gray-500 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                       required={true}
+                      onChange={onChangeHandler}
                     />
                   </div>
                   <div>
@@ -115,6 +136,7 @@ export default function Register() {
                       id="lName"
                       className="bg-gray-50 border border-gray-300 text-gray-500 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                       required={true}
+                      onChange={onChangeHandler}
                     />
                   </div>
                 </div>
@@ -177,7 +199,9 @@ export default function Register() {
                 <button
                   type="submit"
                   className="w-1/4 text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                  onClick={() => handleSignup(email, password, username)}
+                  onClick={() =>
+                    handleSignup(email, password, username, firstName, lastName)
+                  }
                 >
                   Register
                 </button>
