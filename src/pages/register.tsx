@@ -5,15 +5,68 @@ import { Roboto } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import FilmReel from "@/components/FilmReel";
 import Link from "next/link";
+import { useState, ChangeEvent } from "react";
 import animations from "../styles/animations.module.css";
+import { initializeApp, getApps } from "firebase/app";
+
+import { handleFirebaseLoginError } from "@/lib/handleErrors";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { FirebaseError } from "firebase/app";
+import { firebaseConfig } from "@/lib/firebase";
 
 const inter = Inter({ subsets: ["latin"] });
-
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
+const auth = getAuth(app);
 export default function Register() {
-  const handleRegister = () => {
-    window.location.assign("/feed");
-  };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [username, setUsername] = useState("");
 
+  // Initialize the Firebase auth object
+  const auth = getAuth();
+
+  // Function to handle the signup
+  const handleSignup = async (
+    email: string,
+    password: string,
+    username: string
+  ) => {
+    try {
+      // Create a new user account with the email and password
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      await updateProfile(userCredential.user, {
+        displayName: username,
+      });
+
+      window.location.assign("/feed");
+    } catch (error) {
+      const firebaseError = error as FirebaseError;
+
+      console.log(handleFirebaseLoginError(firebaseError));
+    }
+  };
+  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+
+    if (name === "email") {
+      setEmail(value);
+      console.log(email);
+    } else if (name === "password") {
+      setPassword(value);
+    } else if (name === "usernames") {
+      setUsername(value);
+    }
+  };
   return (
     <>
       <Head>
@@ -66,16 +119,17 @@ export default function Register() {
                   </div>
                 </div>
                 <div>
-                <label className="block mb-2 text-sm font-medium text-gray-500 ">
-                      Username
-                    </label>
-                    <input
-                      type="text"
-                      name="username"
-                      id="username"
-                      className="bg-gray-50 border border-gray-300 text-gray-500 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                      required={true}
-                    />
+                  <label className="block mb-2 text-sm font-medium text-gray-500 ">
+                    Username
+                  </label>
+                  <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    className="bg-gray-50 border border-gray-300 text-gray-500 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                    required={true}
+                    onChange={onChangeHandler}
+                  />
                 </div>
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-500 ">
@@ -88,6 +142,7 @@ export default function Register() {
                     className="bg-gray-50 border border-gray-300 text-gray-500 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="name@example.com"
                     required={true}
+                    onChange={onChangeHandler}
                   />
                 </div>
                 <div>
@@ -100,6 +155,7 @@ export default function Register() {
                     id="password"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     required={true}
+                    onChange={onChangeHandler}
                   />
                 </div>
                 <div className="flex items-center justify-between">
@@ -121,7 +177,7 @@ export default function Register() {
                 <button
                   type="submit"
                   className="w-1/4 text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                  onClick={handleRegister}
+                  onClick={() => handleSignup(email, password, username)}
                 >
                   Register
                 </button>
