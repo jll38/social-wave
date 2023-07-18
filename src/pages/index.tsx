@@ -1,25 +1,56 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "next/font/google";
-import { Roboto } from "next/font/google";
-import styles from "@/styles/Home.module.css";
-import FilmReel from "@/components/FilmReel";
 import Link from "next/link";
-import animations from "../styles/animations.module.css"
+import styles from "@/styles/Home.module.css";
+import { FormEvent, useState, ChangeEvent } from "react";
+import animations from "../styles/animations.module.css";
+import { initializeApp, getApps } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
-const inter = Inter({ subsets: ["latin"] });
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+};
+
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
+const auth = getAuth(app);
 
 export default function Home() {
-  const images = [
-    "https://images.pexels.com/photos/10297667/pexels-photo-10297667.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    "https://images.pexels.com/photos/7541692/pexels-photo-7541692.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    "https://images.pexels.com/photos/14080409/pexels-photo-14080409.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  ];
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
-  const handleLogin = () => {
-    window.location.assign("/feed");
+  const handleLogin = (event: FormEvent) => {
+    event.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // ...
+        window.location.assign("/feed");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage);
+      });
   };
 
+  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+
+    if (name === 'email') {
+        setEmail(value);
+        console.log(email)
+    } else if (name === 'password') {
+        setPassword(value);
+    }
+};
   return (
     <>
       <Head>
@@ -29,8 +60,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main id="hero-screen">
-        
-      <Image src={"/images/700821.png"} alt="background img" fill={true} className={`absolute -z-10 ${animations.bob}`} />
+        <Image
+          src={"/images/700821.png"}
+          alt="background img"
+          fill={true}
+          className={`absolute -z-10 ${animations.bob}`}
+        />
         <div className="min-h-screen flex items-center justify-center object-center z-50">
           <div className="text-center w-full sm:w-3/4 md:w-1/3 rounded-xl bg-white py-10 shadow-lg">
             <div id="login-box-header" className=" my-5">
@@ -42,6 +77,7 @@ export default function Home() {
             <div id="login-box-body" className="text-left p-5">
               <form className="space-y-2 md:space-y-2" action="#">
                 <div>
+                  {error !== null && <div>{error}</div>}
                   <label className="block mb-2 text-sm font-medium text-gray-500 ">
                     Your email
                   </label>
@@ -50,8 +86,9 @@ export default function Home() {
                     name="email"
                     id="email"
                     className="bg-gray-50 border border-gray-300 text-gray-500 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    placeholder="name@example.com"
+                    placeholder="e.g: name@example.com"
                     required={true}
+                    onChange={onChangeHandler}
                   />
                 </div>
                 <div>
@@ -65,6 +102,7 @@ export default function Home() {
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     required={true}
+                    onChange={onChangeHandler}
                   />
                 </div>
                 <div className="flex items-center justify-between">

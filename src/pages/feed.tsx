@@ -4,9 +4,13 @@ import { FeedFriend } from "./../components/FeedFriend";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
+import { redirect } from 'next/navigation';
+import { signOut, useSession } from 'next-auth/react'
 
 export default function Feed() {
   const [general, setGeneral] = useState(true);
+
+
   return (
     <>
       <Navbar fixed={true}/>
